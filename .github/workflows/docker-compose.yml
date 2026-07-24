@@ -1,14 +1,14 @@
 backend:
-    build: ./apps/backend
-    ports:
-      - '3000:3000'
-    depends_on:
-      - postgres
-      - redis
-    env_file:
-      - ./apps/backend/.env
+  build: ./apps/backend
+  ports:
+    - '3000:3000'
+  depends_on:
+    - postgres
+    - redis
+  env_file:
+    - ./apps/backend/.env
 
-  frontend:
+frontend:
     build: ./apps/frontend
     ports:
       - '3001:3001'
