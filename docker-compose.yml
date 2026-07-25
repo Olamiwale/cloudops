@@ -31,7 +31,7 @@ services:
     env_file:
       - ./apps/backend/.env
 
-frontend:
+  frontend:
     build: ./apps/frontend
     ports:
       - '3001:3001'
