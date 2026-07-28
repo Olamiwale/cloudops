@@ -4,19 +4,25 @@ import { DeploymentInfo } from './deployments.types';
 
 @Injectable()
 export class DeploymentsService {
-  async getDeployments(): Promise<DeploymentInfo[]> {
-    return [];
+  getDeployments(): Promise<DeploymentInfo[]> {
+    return Promise.resolve([]);
   }
 
-  async getDeployment(name: string) {
-    return null;
+  getDeployment(name: string): Promise<DeploymentInfo | null> {
+    void name;
+    return Promise.resolve(null);
   }
 
-  async scaleDeployment(name: string, dto: ScaleDeploymentDto) {
-    return { message: `${name} scaled.`, replicas: dto.replicas };
+  scaleDeployment(name: string, dto: ScaleDeploymentDto) {
+    void name;
+    return Promise.resolve({
+      message: `${name} scaled.`,
+      replicas: dto.replicas,
+    });
   }
 
-  async restartDeployment(name: string) {
-    return { message: `${name} restarted.` };
+  restartDeployment(name: string) {
+    void name;
+    return Promise.resolve({ message: `${name} restarted.` });
   }
 }

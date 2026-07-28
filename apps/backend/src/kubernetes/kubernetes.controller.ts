@@ -3,14 +3,10 @@ import { KubernetesService } from './kubernetes.service';
 
 @Controller('kubernetes')
 export class KubernetesController {
-  constructor(
-    private readonly kubernetesService: KubernetesService,
-  ) {}
+  constructor(private readonly kubernetesService: KubernetesService) {}
 
   @Get('version')
   async getVersion() {
     return this.kubernetesService.getVersion();
   }
-
-
 }

@@ -7,22 +7,24 @@ import { coreV1Api } from '../kubernetes.client';
 export class NamespacesService {
   async getNamespaces() {
     const { items } = await coreV1Api.listNamespace();
-    return items.map(namespace => ({
+    return items.map((namespace) => ({
       ame: namespace.metadata?.name,
       status: namespace.status?.phase,
       createdAt: namespace.metadata?.creationTimestamp,
     }));
   }
 
-  async getNamespace(name: string): Promise<NamespaceInfo | null> {
-    return null;
+  getNamespace(name: string): Promise<NamespaceInfo | null> {
+    void name;
+    return Promise.resolve(null);
   }
 
-  async createNamespace(dto: CreateNamespaceDto) {
-    return dto;
+  createNamespace(dto: CreateNamespaceDto) {
+    return Promise.resolve(dto);
   }
 
-  async deleteNamespace(name: string) {
-    return { message: `${name} deleted.` };
+  deleteNamespace(name: string) {
+    void name;
+    return Promise.resolve({ message: `${name} deleted.` });
   }
 }

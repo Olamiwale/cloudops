@@ -4,15 +4,17 @@ import { UpdateServiceDto } from './services.dto';
 
 @Injectable()
 export class ServicesService {
-  async getServices(): Promise<ServiceInfo[]> {
-    return [];
+  getServices(): Promise<ServiceInfo[]> {
+    return Promise.resolve([]);
   }
 
-  async getService(name: string) {
-    return null;
+  getService(name: string) {
+    void name;
+    return Promise.resolve(null);
   }
 
-  async updateService(name: string, dto: UpdateServiceDto) {
-    return { message: `${name} updated.`, options: dto };
+  updateService(name: string, dto: UpdateServiceDto) {
+    void name;
+    return Promise.resolve({ message: `${name} updated.`, options: dto });
   }
 }

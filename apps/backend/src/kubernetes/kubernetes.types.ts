@@ -4,4 +4,3 @@ export interface ClusterInfo {
   gitVersion: string;
   platform: string;
 }
-

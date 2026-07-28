@@ -5,10 +5,8 @@ export interface ServiceInfo {
   clusterIP: string;
 }
 
-
 // export interface ServicePortInfo {
 //   port: number;
 //   targetPort?: number | string;
 //   protocol?: string;
 // }
-

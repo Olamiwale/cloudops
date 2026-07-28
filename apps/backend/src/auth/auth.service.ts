@@ -29,8 +29,6 @@ export class AuthService {
     return this.issueTokens(user.id, user.email, user.role);
   }
 
-
-
   async refresh(userId: string, refreshToken: string) {
     const stored = await this.redisService.get(`refresh:${userId}`);
     if (!stored || stored !== refreshToken) {
@@ -45,26 +43,49 @@ export class AuthService {
     await this.redisService.del(`refresh:${userId}`);
   }
 
-  private async issueTokens(userId: string | number, email: string, role: string) {
+  private async issueTokens(
+    userId: string | number,
+    email: string,
+    role: string,
+  ) {
     const payload = { sub: String(userId), email, role };
-    const accessTokenTtl = this.configService.get<string>('JWT_EXPIRES_IN', '15m');
-    const refreshTokenTtl = this.configService.get<string>('JWT_REFRESH_EXPIRES_IN', '7d');
+    const accessTokenTtl = this.getJwtExpiresIn('JWT_EXPIRES_IN', '15m');
+    const refreshTokenTtl = this.getJwtExpiresIn(
+      'JWT_REFRESH_EXPIRES_IN',
+      '7d',
+    );
 
+    const accessToken = this.jwtService.sign(payload, {
+      secret: this.configService.get<string>('JWT_SECRET'),
+      expiresIn: accessTokenTtl,
+    });
 
-
-   const accessToken = this.jwtService.sign(payload, {
-  secret: this.configService.get<string>('JWT_SECRET'),
-  expiresIn: this.configService.get<string>('JWT_EXPIRES_IN') as any,
-});
-
-const refreshToken = this.jwtService.sign(payload, {
-  secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
-  expiresIn: this.configService.get<string>('JWT_REFRESH_EXPIRES_IN') as any,
-});
+    const refreshToken = this.jwtService.sign(payload, {
+      secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
+      expiresIn: refreshTokenTtl,
+    });
 
     // store refresh token in Redis so it can be revoked on logout
-    await this.redisService.set(`refresh:${userId}`, refreshToken, 'EX', 7 * 24 * 60 * 60);
+    await this.redisService.set(
+      `refresh:${userId}`,
+      refreshToken,
+      'EX',
+      7 * 24 * 60 * 60,
+    );
 
     return { accessToken, refreshToken };
+  }
+
+  private getJwtExpiresIn(
+    key: string,
+    fallback: string,
+  ): number | `${number}${'s' | 'm' | 'h' | 'd' | 'w'}` {
+    const value = this.configService.get<string>(key, fallback) ?? fallback;
+
+    if (/^\d+$/.test(value)) {
+      return Number(value);
+    }
+
+    return value as `${number}${'s' | 'm' | 'h' | 'd' | 'w'}`;
   }
 }

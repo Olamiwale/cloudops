@@ -4,19 +4,22 @@ import { PodInfo } from './pods.types';
 
 @Injectable()
 export class PodsService {
-  async getPods(): Promise<PodInfo[]> {
-    return [];
+  getPods(): Promise<PodInfo[]> {
+    return Promise.resolve([]);
   }
 
-  async getPod(name: string) {
-    return null;
+  getPod(name: string) {
+    void name;
+    return Promise.resolve(null);
   }
 
-  async deletePod(name: string, dto: DeletePodDto) {
-    return { message: `${name} deleted.`, options: dto };
+  deletePod(name: string, dto: DeletePodDto) {
+    void name;
+    return Promise.resolve({ message: `${name} deleted.`, options: dto });
   }
 
-  async getLogs(name: string) {
-    return [];
+  getLogs(name: string) {
+    void name;
+    return Promise.resolve([]);
   }
 }

@@ -7,8 +7,6 @@ import { WebsocketModule } from './websocket/websocket.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { KubernetesModule } from './kubernetes/kubernetes.module';
-;
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -22,7 +20,6 @@ import { KubernetesModule } from './kubernetes/kubernetes.module';
     UsersModule,
     AuthModule,
     KubernetesModule,
-   
   ],
 })
 export class AppModule {}

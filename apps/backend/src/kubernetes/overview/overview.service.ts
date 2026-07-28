@@ -11,13 +11,13 @@ export interface OverviewInfo {
 
 @Injectable()
 export class OverviewService {
-  async getOverview(): Promise<OverviewInfo> {
-    return {
+  getOverview(): Promise<OverviewInfo> {
+    return Promise.resolve({
       nodes: 0,
       namespaces: 0,
       pods: 0,
       deployments: 0,
       services: 0,
-    };
+    });
   }
 }

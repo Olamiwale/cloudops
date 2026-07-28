@@ -4,30 +4,34 @@ import { DrainNodeDto } from './nodes.dto';
 
 @Injectable()
 export class NodesService {
-  async getNodes(): Promise<NodeInfo[]> {
-    return [];
+  getNodes(): Promise<NodeInfo[]> {
+    return Promise.resolve([]);
   }
 
-  async getNode(name: string): Promise<NodeInfo | null> {
-    return null;
+  getNode(name: string): Promise<NodeInfo | null> {
+    void name;
+    return Promise.resolve(null);
   }
 
-  async cordonNode(name: string) {
-    return {
+  cordonNode(name: string) {
+    void name;
+    return Promise.resolve({
       message: `Node ${name} cordoned successfully.`,
-    };
+    });
   }
 
-  async uncordonNode(name: string) {
-    return {
+  uncordonNode(name: string) {
+    void name;
+    return Promise.resolve({
       message: `Node ${name} uncordoned successfully.`,
-    };
+    });
   }
 
-  async drainNode(name: string, dto: DrainNodeDto) {
-    return {
+  drainNode(name: string, dto: DrainNodeDto) {
+    void name;
+    return Promise.resolve({
       message: `Node ${name} drained successfully.`,
       options: dto,
-    };
+    });
   }
 }

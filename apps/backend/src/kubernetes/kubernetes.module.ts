@@ -14,7 +14,6 @@ import { DeploymentsService } from './deployments/deployments.service';
 import { ServicesService } from './services/services.service';
 import { OverviewService } from './overview/overview.service';
 
-
 @Module({
   controllers: [
     KubernetesController,
