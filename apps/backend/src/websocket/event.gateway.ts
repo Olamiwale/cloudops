@@ -5,8 +5,7 @@ import {
   OnGatewayDisconnect,
 } from '@nestjs/websockets';
 import { JwtService } from '@nestjs/jwt';
-import { Server, Socket } from 'socket.io';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import { Server, Socket, DefaultEventsMap } from 'socket.io';
 
 interface JwtPayload {
   sub: string;
