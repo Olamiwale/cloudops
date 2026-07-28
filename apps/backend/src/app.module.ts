@@ -1,10 +1,28 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { envValidationSchema } from './config/env.validation';
+import { PrismaModule } from './prisma/prisma.module';
+import { RedisModule } from './redis/redis.module';
+import { WebsocketModule } from './websocket/websocket.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { KubernetesModule } from './kubernetes/kubernetes.module';
+;
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      validationSchema: envValidationSchema,
+      envFilePath: '.env',
+    }),
+    PrismaModule,
+    RedisModule,
+    WebsocketModule,
+    UsersModule,
+    AuthModule,
+    KubernetesModule,
+   
+  ],
 })
 export class AppModule {}
