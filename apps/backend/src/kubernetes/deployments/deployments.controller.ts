@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { DeploymentsService } from './deployments.service';
-import { ScaleDeploymentDto } from './deployments.dto';
 
 @Controller('kubernetes/deployments')
 export class DeploymentsController {
@@ -14,15 +13,5 @@ export class DeploymentsController {
   @Get(':name')
   getDeployment(@Param('name') name: string) {
     return this.deploymentsService.getDeployment(name);
-  }
-
-  @Post(':name/scale')
-  scale(@Param('name') name: string, @Body() dto: ScaleDeploymentDto) {
-    return this.deploymentsService.scaleDeployment(name, dto);
-  }
-
-  @Post(':name/restart')
-  restart(@Param('name') name: string) {
-    return this.deploymentsService.restartDeployment(name);
   }
 }

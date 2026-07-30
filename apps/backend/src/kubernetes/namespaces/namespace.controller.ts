@@ -1,6 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param } from '@nestjs/common';
 import { NamespacesService } from './namespace.service';
-import { CreateNamespaceDto } from './namespace.dto';
 
 @Controller('kubernetes/namespaces')
 export class NamespacesController {
@@ -14,15 +13,5 @@ export class NamespacesController {
   @Get(':name')
   getNamespace(@Param('name') name: string) {
     return this.namespacesService.getNamespace(name);
-  }
-
-  @Post()
-  createNamespace(@Body() dto: CreateNamespaceDto) {
-    return this.namespacesService.createNamespace(dto);
-  }
-
-  @Delete(':name')
-  deleteNamespace(@Param('name') name: string) {
-    return this.namespacesService.deleteNamespace(name);
   }
 }

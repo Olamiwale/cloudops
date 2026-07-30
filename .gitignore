@@ -7,3 +7,4 @@ build/
 .DS_Store
 
 z_script.sh
+cat_k8s_files.sh

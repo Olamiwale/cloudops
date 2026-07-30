@@ -1,10 +1,20 @@
-const pods = [
-  { name: "api-7d4f5", status: "Running", namespace: "production" },
-  { name: "worker-4d9c8", status: "Pending", namespace: "production" },
-  { name: "web-865bb", status: "Running", namespace: "staging" },
-];
+import { useEffect, useState } from "react";
+import { getPods } from "../api/pod";
+import type { PodInfo } from "../types/k8s";
 
 function Pods() {
+  const [pods, setPods] = useState<PodInfo[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getPods()
+      .then(setPods)
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <p className="text-slate-500">Loading...</p>;
+
   return (
     <div className="grid gap-4">
       <div>

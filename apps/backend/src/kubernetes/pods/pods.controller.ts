@@ -1,6 +1,5 @@
-import { Body, Controller, Delete, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { PodsService } from './pods.service';
-import { DeletePodDto } from './pods.dto';
 
 @Controller('kubernetes/pods')
 export class PodsController {
@@ -19,10 +18,5 @@ export class PodsController {
   @Get(':name/logs')
   getLogs(@Param('name') name: string) {
     return this.podsService.getLogs(name);
-  }
-
-  @Delete(':name')
-  deletePod(@Param('name') name: string, @Body() dto: DeletePodDto) {
-    return this.podsService.deletePod(name, dto);
   }
 }

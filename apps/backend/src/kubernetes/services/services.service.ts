@@ -1,20 +1,31 @@
 import { Injectable } from '@nestjs/common';
+import * as k8s from '@kubernetes/client-node';
+import { coreV1Api } from '../kubernetes.client';
 import { ServiceInfo } from './services.types';
-import { UpdateServiceDto } from './services.dto';
 
 @Injectable()
 export class ServicesService {
-  getServices(): Promise<ServiceInfo[]> {
-    return Promise.resolve([]);
+  async getServices(): Promise<ServiceInfo[]> {
+    const { items } = await coreV1Api.listServiceForAllNamespaces();
+    return items.map((s) => this.toServiceInfo(s));
   }
 
-  getService(name: string) {
-    void name;
-    return Promise.resolve(null);
+  async getService(name: string): Promise<ServiceInfo | null> {
+    const svc = await this.findService(name);
+    return svc ? this.toServiceInfo(svc) : null;
   }
 
-  updateService(name: string, dto: UpdateServiceDto) {
-    void name;
-    return Promise.resolve({ message: `${name} updated.`, options: dto });
+  private async findService(name: string) {
+    const { items } = await coreV1Api.listServiceForAllNamespaces();
+    return items.find((s) => s.metadata?.name === name);
+  }
+
+  private toServiceInfo(svc: k8s.V1Service): ServiceInfo {
+    return {
+      name: svc.metadata?.name ?? '',
+      namespace: svc.metadata?.namespace ?? '',
+      type: svc.spec?.type ?? '',
+      clusterIP: svc.spec?.clusterIP ?? '',
+    };
   }
 }

@@ -1,6 +1,8 @@
 import api from "./axios";
 
 export const getOverview = async () => {
-  const response = await api.get("/dashboard/overview");
-  return response.data;
+  const { data } = await api.get("/kubernetes/overview");
+  return data;
 };
+
+
