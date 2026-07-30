@@ -25,7 +25,7 @@ function Register() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 to-slate-700 px-6 py-8">
+    <div className="flex min-h-screen items-center justify-center px-6 py-8">
       <div className="w-full max-w-md rounded-2xl bg-white/95 p-8 shadow-2xl shadow-slate-950/20">
         <div className="mb-6">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">CloudOps</p>
