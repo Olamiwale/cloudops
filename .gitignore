@@ -8,3 +8,5 @@ build/
 
 z_script.sh
 cat_k8s_files.sh
+
+.env.production
