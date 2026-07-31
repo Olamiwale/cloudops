@@ -25,7 +25,7 @@ function Login() {
         <div className="mb-6">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">CloudOps</p>
           <h1 className="mt-2 text-3xl font-semibold text-slate-900">Welcome back</h1>
-          <p className="mt-2 text-sm text-slate-500">Sign in to manage your clusters, pods, and deployments.</p>
+          <p className="mt-2 text-sm text-slate-500">Sign in to manage your clusters.</p>
         </div>
 
         <form className="grid gap-4" onSubmit={handleSubmit}>
