@@ -29,7 +29,7 @@ services:
       - postgres
       - redis
     env_file:
-      - ./apps/backend/.env
+      - ./apps/backend/.env.production
 
   frontend:
     build: ./apps/frontend
@@ -38,7 +38,7 @@ services:
     depends_on:
       - backend
     env_file:
-      - ./apps/frontend/.env
+      - ./apps/frontend/.env.production
 
 
 volumes:
